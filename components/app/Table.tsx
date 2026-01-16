@@ -52,15 +52,21 @@ export function TableCell({
   children,
   className = '',
   header = false,
+  colSpan,
 }: {
   children: React.ReactNode;
   className?: string;
   header?: boolean;
+  colSpan?: number;
 }) {
   const Tag = header ? 'th' : 'td';
   const baseClasses = header
     ? 'px-6 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider'
     : 'px-6 py-4 text-sm text-white/90';
 
-  return <Tag className={`${baseClasses} ${className}`}>{children}</Tag>;
+  return (
+    <Tag className={`${baseClasses} ${className}`} colSpan={colSpan}>
+      {children}
+    </Tag>
+  );
 }
