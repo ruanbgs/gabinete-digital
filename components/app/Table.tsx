@@ -48,25 +48,24 @@ export function TableRow({
 }
 
 // Componente para célula da tabela
-export function TableCell({
-  children,
-  className = '',
-  header = false,
-  colSpan,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  header?: boolean;
-  colSpan?: number;
-}) {
-  const Tag = header ? 'th' : 'td';
-  const baseClasses = header
-    ? 'px-6 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider'
-    : 'px-6 py-4 text-sm text-white/90';
-
-  return (
-    <Tag className={`${baseClasses} ${className}`} colSpan={colSpan}>
-      {children}
-    </Tag>
-  );
-}
+type TableCellProps = {
+    children: React.ReactNode;
+    className?: string;
+    header?: boolean;
+  } & React.ThHTMLAttributes<HTMLTableCellElement> &
+    React.TdHTMLAttributes<HTMLTableCellElement>;
+  
+  export function TableCell({ children, className = '', header = false, ...props }: TableCellProps) {
+    const Tag = header ? 'th' : 'td';
+    const baseClasses = header
+      ? 'px-6 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider'
+      : 'px-6 py-4 text-sm text-white/90';
+  
+    return (
+      <Tag className={`${baseClasses} ${className}`} {...props}>
+        {children}
+      </Tag>
+    );
+  }
+  
+  
